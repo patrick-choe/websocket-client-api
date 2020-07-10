@@ -24,7 +24,7 @@ class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
                 addListener(adapter)
             }
             flag = true
-        } catch (exception: Exception) {
+        } catch (throwable: Throwable) {
             throw WebSocketNoResponseException()
             flag = false
         }
@@ -35,8 +35,8 @@ class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
             try {
                 webSocket.connect()
                 true
-            } catch (exception: Exception) {
-                exception.printStackTrace()
+            } catch (throwable: Throwable) {
+                throwable.printStackTrace()
                 false
             }
         } else {
