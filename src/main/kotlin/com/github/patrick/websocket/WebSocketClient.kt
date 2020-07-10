@@ -8,12 +8,13 @@ import javax.net.ssl.SSLContext
 
 @Suppress("unused")
 class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
-    private var webSocket: WebSocket
-    private var flag = true
+    var socket: WebSocket
+        private set
+    private var checked = true
 
     init {
         try {
-            webSocket = WebSocketFactory().apply {
+            socket = WebSocketFactory().apply {
                 if (tls) {
                     sslContext = SSLContext.getInstance("TLS").apply {
                         init(null, null, null)
@@ -23,17 +24,17 @@ class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
             }.createSocket(url).apply {
                 addListener(adapter)
             }
-            flag = true
+            checked = true
         } catch (throwable: Throwable) {
             throw WebSocketNoResponseException()
-            flag = false
+            checked = false
         }
     }
 
     fun connect(): Boolean {
-        return if (flag) {
+        return if (checked) {
             try {
-                webSocket.connect()
+                socket.connect()
                 true
             } catch (throwable: Throwable) {
                 throwable.printStackTrace()
@@ -45,6 +46,6 @@ class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
     }
 
     fun disconnect() {
-        webSocket.disconnect()
+        socket.disconnect()
     }
 }

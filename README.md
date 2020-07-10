@@ -1,5 +1,7 @@
 # WebSocket Client API (for Bukkit)
 
+A Simple WebSocket API for Bukkit
+
 ---
 
 ###### (en-us)
@@ -101,3 +103,27 @@ dependencies {
 ## 주의 사항
 
 위 라이브러리는 플러그인이 아니므로, 사용하실 플러그인에 포함시켜 사용해주세요. (FatJar로 사용)
+
+---
+
+## Sample Code / 샘플 코드
+
+### Kotlin
+
+```kotlin
+val client = WebSocketAPI.createWebSocket("wss://URL_HERE", false)
+if (client != null && client.connect()) {
+    // Something when successful
+} else {
+    // Something when failure
+}
+
+// implements Listener
+fun onWebSocketConnect(event: WebSocketConnectedEvent) {
+    if (event.socket == client.socket) {
+        // Something to do
+    }
+}
+
+client?.disconnect()
+```

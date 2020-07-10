@@ -1,7 +1,6 @@
 package com.github.patrick.websocket
 
 import com.github.patrick.websocket.exception.WebSocketNoResponseException
-import com.neovisionaries.ws.client.WebSocketAdapter
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object WebSocketAPI {
@@ -13,9 +12,19 @@ object WebSocketAPI {
     @JvmStatic
     fun createWebSocket(url: String, tls: Boolean): WebSocketClient? {
         return try {
-            WebSocketClient(url, WebSocketAdapter(), tls)
+            WebSocketClient(url, WebSocketHandler(), tls)
         } catch (exception: WebSocketNoResponseException) {
             null
         }
+    }
+
+    @JvmStatic
+    fun createUnsafeWebSocket(url: String): WebSocketClient {
+        return createUnsafeWebSocket(url, false)
+    }
+
+    @JvmStatic
+    fun createUnsafeWebSocket(url: String, tls: Boolean): WebSocketClient {
+        return WebSocketClient(url, WebSocketHandler(), tls)
     }
 }
