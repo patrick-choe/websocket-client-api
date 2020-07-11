@@ -19,6 +19,8 @@ class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: B
         private set
     var checked = true
         private set
+    var connected = false
+        private set
 
     init {
         try {
@@ -47,6 +49,10 @@ class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: B
      * @return true if connection is successful
      */
     fun connect(): Boolean {
+        if (connected) {
+            println("already connected")
+            return false
+        }
         return if (checked) {
             try {
                 socket?.connect()
@@ -55,9 +61,11 @@ class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: B
                 if (!suppress) {
                     throwable.printStackTrace()
                 }
+                connected = true
                 false
             }
         } else {
+            connected = false
             false
         }
     }
@@ -67,6 +75,7 @@ class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: B
      */
     fun disconnect() {
         socket?.disconnect()
+        connected = false
     }
 
     /**

@@ -49,10 +49,6 @@ dependencies {
 }
 ```
 
-## Note (Important)
-
-Do not forget to include this API in the plugin. (as a FatJar)
-
 ---
 
 ###### (ko-kr)
@@ -99,10 +95,6 @@ dependencies {
     implementation("com.github.patrick-mc:websocket-client-api:1.0")
 }
 ```
-
-## 주의 사항
-
-위 라이브러리는 플러그인이 아니므로, 사용하실 플러그인에 포함시켜 사용해주세요. (FatJar로 사용)
 
 ---
 

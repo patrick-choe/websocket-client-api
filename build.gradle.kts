@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.patrick-mc"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     maven("https://repo.maven.apache.org/maven2/")
@@ -46,9 +46,8 @@ tasks {
         from(sourceSets["main"].allSource)
     }
 
-    create<Jar>("distJar") {
-        from(shadowJar)
-        archiveClassifier.set("dist")
+    shadowJar {
+        archiveClassifier.set("")
     }
 }
 
@@ -56,11 +55,9 @@ try {
     publishing {
         publications {
             create<MavenPublication>("webSocketClientAPI") {
-                from(components["java"])
-
                 artifact(tasks["sourcesJar"])
                 artifact(tasks["dokkaJar"])
-                artifact(tasks["distJar"])
+                artifact(tasks["shadowJar"])
 
                 repositories {
                     mavenLocal()
@@ -116,7 +113,7 @@ try {
 
     signing {
         isRequired = true
-        sign(tasks["jar"], tasks["sourcesJar"], tasks["dokkaJar"], tasks["shadowJar"])
+        sign(tasks["sourcesJar"], tasks["dokkaJar"], tasks["shadowJar"])
         sign(publishing.publications["webSocketClientAPI"])
     }
 } catch (ignored: groovy.lang.MissingPropertyException) {}

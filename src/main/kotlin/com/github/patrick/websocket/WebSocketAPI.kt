@@ -16,7 +16,7 @@ object WebSocketAPI {
      */
     @JvmStatic
     fun createWebSocket(url: String): WebSocketClient? {
-        return createWebSocket(url, false)
+        return createWebSocket(url, tls = false, suppress = false)
     }
 
     /**
@@ -28,9 +28,9 @@ object WebSocketAPI {
      * @return nullable WebSocketClient
      */
     @JvmStatic
-    fun createWebSocket(url: String, tls: Boolean): WebSocketClient? {
+    fun createWebSocket(url: String, tls: Boolean, suppress: Boolean): WebSocketClient? {
         return try {
-            WebSocketClient(url, WebSocketHandler(), tls)
+            WebSocketClient(url, WebSocketHandler(), tls = tls, suppress = suppress)
         } catch (exception: WebSocketNoResponseException) {
             null
         }
@@ -42,12 +42,12 @@ object WebSocketAPI {
      * when websocket has no response.
      *
      * @param url websocket url to connect
-     * @return nullable WebSocketClient
+     * @return WebSocketClient
      */
     @JvmStatic
     @Throws(WebSocketNoResponseException::class)
     fun createUnsafeWebSocket(url: String): WebSocketClient {
-        return createUnsafeWebSocket(url, false)
+        return createUnsafeWebSocket(url, tls = false, suppress = false)
     }
 
     /**
@@ -57,11 +57,11 @@ object WebSocketAPI {
      *
      * @param url websocket url to connect
      * @param tls whether to use tls support
-     * @return nullable WebSocketClient
+     * @return WebSocketClient
      */
     @JvmStatic
     @Throws(WebSocketNoResponseException::class)
-    fun createUnsafeWebSocket(url: String, tls: Boolean): WebSocketClient {
-        return WebSocketClient(url, WebSocketHandler(), tls)
+    fun createUnsafeWebSocket(url: String, tls: Boolean, suppress: Boolean): WebSocketClient {
+        return WebSocketClient(url, WebSocketHandler(), tls = tls, suppress = suppress)
     }
 }
