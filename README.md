@@ -16,6 +16,7 @@ This API provides easy access to websocket client from Bukkit.
 
 - Simple WebSocketClient connect / disconnect
 - WebSocket Event for Bukkit
+- Works as a Bukkit Plugin (put this into the 'plugins' folder)
 
 ## How to Use
 
@@ -31,7 +32,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0.1'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.0.2'
 }
 ```
 
@@ -47,7 +48,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0.1")
+    implementation("com.github.patrick-mc:websocket-client-api:1.0.2")
 }
 ```
 
@@ -63,6 +64,7 @@ dependencies {
 
 - 간단한 WebSocket 연결 / 해제
 - Bukkit을 위한 WebSocket Event
+- Bukkit 플러그인으로 사용 ('plugins' 폴더에 넣어주세요.)
 
 ## 사용 방법 
 
@@ -78,7 +80,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0.1'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.0.2'
 }
 ```
 
@@ -94,7 +96,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0.1")
+    implementation("com.github.patrick-mc:websocket-client-api:1.0.2")
 }
 ```
 

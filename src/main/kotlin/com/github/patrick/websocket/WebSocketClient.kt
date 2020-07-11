@@ -50,7 +50,9 @@ class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: B
      */
     fun connect(): Boolean {
         if (connected) {
-            println("already connected")
+            if (!suppress) {
+                println("already connected")
+            }
             return false
         }
         return if (checked) {
@@ -74,7 +76,11 @@ class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: B
      * Disconnect from websocket
      */
     fun disconnect() {
-        socket?.disconnect()
+        if (connected) {
+            socket?.disconnect()
+        } else if (!suppress) {
+            println("not connected")
+        }
         connected = false
     }
 
