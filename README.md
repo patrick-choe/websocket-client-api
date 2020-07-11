@@ -29,7 +29,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.0.1'
 }
 ```
 
@@ -45,7 +45,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0")
+    implementation("com.github.patrick-mc:websocket-client-api:1.0.1")
 }
 ```
 
@@ -76,7 +76,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.0.1'
 }
 ```
 
@@ -92,7 +92,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0")
+    implementation("com.github.patrick-mc:websocket-client-api:1.0.1")
 }
 ```
 
@@ -103,7 +103,7 @@ dependencies {
 ### Kotlin
 
 ```kotlin
-val client = WebSocketAPI.createWebSocket("wss://URL_HERE", false)
+val client = WebSocketAPI.createWebSocket("wss://URL_HERE", tls = true, suppress = false)
 if (client != null && client.connect()) {
     // Something when successful
 } else {
@@ -112,7 +112,7 @@ if (client != null && client.connect()) {
 
 // implements Listener
 fun onWebSocketConnect(event: WebSocketConnectedEvent) {
-    if (event.socket == client.socket) {
+    if (event.socket == client?.socket) {
         // Something to do
     }
 }
