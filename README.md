@@ -2,6 +2,8 @@
 
 A Simple WebSocket API for Bukkit
 
+Sample Plugin: [websocket-client](https://github.com/patrick-mc/websocket-client/)
+
 ---
 
 ###### (en-us)
