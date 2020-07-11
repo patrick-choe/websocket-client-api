@@ -17,6 +17,7 @@ This API provides easy access to websocket client from Bukkit.
 - Simple WebSocketClient connect / disconnect
 - WebSocket Event for Bukkit
 - Works as a Bukkit Plugin (put this into the 'plugins' folder)
+- Requires [Kotlin Plugin](https://github.com/noonmaru/kotlin-plugin/releases/tag/1.3.72/)
 
 ## How to Use
 
@@ -65,6 +66,7 @@ dependencies {
 - 간단한 WebSocket 연결 / 해제
 - Bukkit을 위한 WebSocket Event
 - Bukkit 플러그인으로 사용 ('plugins' 폴더에 넣어주세요.)
+- [Kotlin Plugin](https://github.com/noonmaru/kotlin-plugin/releases/tag/1.3.72/) 필요
 
 ## 사용 방법 
 
