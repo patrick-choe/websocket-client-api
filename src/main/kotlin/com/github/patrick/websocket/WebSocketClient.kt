@@ -6,11 +6,19 @@ import com.neovisionaries.ws.client.WebSocketAdapter
 import com.neovisionaries.ws.client.WebSocketFactory
 import javax.net.ssl.SSLContext
 
-@Suppress("unused")
-class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
-    var socket: WebSocket
+/**
+ * This class represents the client itself.
+ *
+ * @param url the websocket url
+ * @param adapter the adapter to handle this client
+ * @param tls whether to use tls support
+ */
+@Suppress("unused", "MemberVisibilityCanBePrivate")
+class WebSocketClient(val url: String, val adapter: WebSocketAdapter, val tls: Boolean = false, val suppress: Boolean = false) {
+    var socket: WebSocket? = null
         private set
-    private var checked = true
+    var checked = true
+        private set
 
     init {
         try {
@@ -26,18 +34,27 @@ class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
             }
             checked = true
         } catch (throwable: Throwable) {
-            throw WebSocketNoResponseException()
             checked = false
+            if (!suppress) {
+                throw WebSocketNoResponseException("No response from $url")
+            }
         }
     }
 
+    /**
+     * Try connecting to websocket
+     *
+     * @return true if connection is successful
+     */
     fun connect(): Boolean {
         return if (checked) {
             try {
-                socket.connect()
+                socket?.connect()
                 true
             } catch (throwable: Throwable) {
-                throwable.printStackTrace()
+                if (!suppress) {
+                    throwable.printStackTrace()
+                }
                 false
             }
         } else {
@@ -45,7 +62,32 @@ class WebSocketClient(url: String, adapter: WebSocketAdapter, tls: Boolean) {
         }
     }
 
+    /**
+     * Disconnect from websocket
+     */
     fun disconnect() {
-        socket.disconnect()
+        socket?.disconnect()
+    }
+
+    /**
+     * Send text to websocket
+     *
+     * @param message a String to send to client
+     * @return itself
+     */
+    fun send(message: String): WebSocketClient {
+        socket?.sendText(message)
+        return this
+    }
+
+    /**
+     * Send binary to websocket
+     *
+     * @param binary a binary to send to client
+     * @return itself
+     */
+    fun send(binary: ByteArray): WebSocketClient {
+        socket?.sendBinary(binary)
+        return this
     }
 }
