@@ -33,7 +33,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0.3'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.0.4'
 }
 ```
 
@@ -49,7 +49,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0.3")
+    implementation("com.github.patrick-mc:websocket-client-api:1.0.4")
 }
 ```
 
@@ -82,7 +82,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0.3'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.0.4'
 }
 ```
 
@@ -98,7 +98,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0.3")
+    implementation("com.github.patrick-mc:websocket-client-api:1.0.4")
 }
 ```
 
