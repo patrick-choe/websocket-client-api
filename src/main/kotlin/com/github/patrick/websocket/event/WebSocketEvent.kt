@@ -26,7 +26,7 @@ import org.bukkit.event.Event
 /**
  * Websocket event abstract class
  *
- * @param websocket event's websocket
+ * @param socket event's websocket
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-abstract class WebSocketEvent(val websocket: WebSocket) : Event()
+abstract class WebSocketEvent internal constructor(val socket: WebSocket) : Event()

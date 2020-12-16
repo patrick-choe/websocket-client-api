@@ -23,6 +23,7 @@ package com.github.patrick.websocket
 import com.github.patrick.websocket.event.WebSocketBinaryEvent
 import com.github.patrick.websocket.event.WebSocketConnectedEvent
 import com.github.patrick.websocket.event.WebSocketDisconnectedEvent
+import com.github.patrick.websocket.event.WebSocketEvent
 import com.github.patrick.websocket.event.WebSocketMessageEvent
 import com.github.patrick.websocket.plugin.WebSocketPlugin
 import com.neovisionaries.ws.client.WebSocket
@@ -33,40 +34,38 @@ import org.bukkit.Bukkit
 /**
  * Handles websocket events
  */
-class WebSocketHandler : WebSocketAdapter() {
+internal class WebSocketHandler : WebSocketAdapter() {
     /**
      * On connect
      */
     override fun onConnected(socket: WebSocket, headers: Map<String, List<String>>) {
-        Bukkit.getScheduler().callSyncMethod(WebSocketPlugin.INSTANCE) {
-            Bukkit.getServer().pluginManager.callEvent(WebSocketConnectedEvent(socket, headers))
-        }.get()
+        callEvent(WebSocketConnectedEvent(socket, headers))
     }
 
     /**
      * On disconnect
      */
     override fun onDisconnected(socket: WebSocket, serverCloseFrame: WebSocketFrame, clientCloseFrame: WebSocketFrame, closedByServer: Boolean) {
-        Bukkit.getScheduler().callSyncMethod(WebSocketPlugin.INSTANCE) {
-            Bukkit.getServer().pluginManager.callEvent(WebSocketDisconnectedEvent(socket, closedByServer))
-        }.get()
+        callEvent(WebSocketDisconnectedEvent(socket, closedByServer))
     }
 
     /**
      * On message receive
      */
     override fun onTextMessage(socket: WebSocket, message: String) {
-        Bukkit.getScheduler().callSyncMethod(WebSocketPlugin.INSTANCE) {
-            Bukkit.getServer().pluginManager.callEvent(WebSocketMessageEvent(socket, message))
-        }.get()
+        callEvent(WebSocketMessageEvent(socket, message))
     }
 
     /**
      * On binary receive
      */
     override fun onBinaryMessage(socket: WebSocket, binary: ByteArray) {
+        callEvent(WebSocketBinaryEvent(socket, binary))
+    }
+
+    private fun callEvent(event: WebSocketEvent) {
         Bukkit.getScheduler().callSyncMethod(WebSocketPlugin.INSTANCE) {
-            Bukkit.getServer().pluginManager.callEvent(WebSocketBinaryEvent(socket, binary))
+            Bukkit.getServer().pluginManager.callEvent(event)
         }.get()
     }
 }

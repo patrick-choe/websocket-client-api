@@ -23,8 +23,8 @@ package com.github.patrick.websocket.event
 import com.neovisionaries.ws.client.WebSocket
 import org.bukkit.event.HandlerList
 
-@Suppress("MemberVisibilityCanBePrivate", "unused", "CanBeParameter")
-class WebSocketMessageEvent(val socket: WebSocket, val message: String) : WebSocketEvent(socket) {
+@Suppress("unused")
+class WebSocketMessageEvent internal constructor(webSocket: WebSocket, val message: String) : WebSocketEvent(webSocket) {
     companion object {
         @JvmStatic
         val handlerList = HandlerList()

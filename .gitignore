@@ -16,9 +16,9 @@
 #
 # Contact me on <mailpatrickkr@gmail.com>
 
-/.gradle/
-/.idea/
-/build/
+.gradle/
+.idea/
+build/
 *.class
 *.jar
 gradle.properties

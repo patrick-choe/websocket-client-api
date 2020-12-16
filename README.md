@@ -17,7 +17,7 @@ This API provides easy access to websocket client from Bukkit.
 - Simple WebSocketClient connect / disconnect
 - WebSocket Event for Bukkit
 - Works as a Bukkit Plugin (put this into the 'plugins' folder)
-- Requires [Kotlin Plugin](https://github.com/noonmaru/kotlin-plugin/releases/tag/1.3.72/)
+- Requires [Kotlin Plugin](https://github.com/noonmaru/kotlin-plugin/releases/tag/1.4.20/)
 
 ## How to Use
 
@@ -33,7 +33,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0.4'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.1.0'
 }
 ```
 
@@ -49,7 +49,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0.4")
+    implementation("com.github.patrick-mc:websocket-client-api:1.1.0")
 }
 ```
 
@@ -59,14 +59,14 @@ dependencies {
 
 ## 프로젝트 설명
 
-이 API는 WebSocket을 Bukkit에서 쉽게 사용하기 위해 만들어졌습니다.
+이 API 는 WebSocket 을 Bukkit 에서 쉽게 사용하기 위해 만들어졌습니다.
 
 ## 특징
 
 - 간단한 WebSocket 연결 / 해제
-- Bukkit을 위한 WebSocket Event
+- Bukkit 을 위한 WebSocket Event
 - Bukkit 플러그인으로 사용 ('plugins' 폴더에 넣어주세요.)
-- [Kotlin Plugin](https://github.com/noonmaru/kotlin-plugin/releases/tag/1.3.72/) 필요
+- [Kotlin Plugin](https://github.com/noonmaru/kotlin-plugin/releases/tag/1.4.20/) 필요
 
 ## 사용 방법 
 
@@ -82,7 +82,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.patrick-mc:websocket-client-api:1.0.4'
+    implementation 'com.github.patrick-mc:websocket-client-api:1.1.0'
 }
 ```
 
@@ -98,7 +98,7 @@ allprojects {
 
 ```kotlin
 dependencies {
-    implementation("com.github.patrick-mc:websocket-client-api:1.0.4")
+    implementation("com.github.patrick-mc:websocket-client-api:1.1.0")
 }
 ```
 
@@ -117,11 +117,18 @@ if (client != null && client.connect()) {
 }
 
 // implements Listener
+@EventHandler
 fun onWebSocketConnect(event: WebSocketConnectedEvent) {
     if (event.socket == client?.socket) {
         // Something to do
     }
 }
 
-client?.disconnect()
+@EventHandler
+fun onWebSocketConnect(event: WebSocketDisconnectedEvent) {
+    if (event.socket == client?.socket) {
+        client.reconnect()
+    }
+}
+
 ```
